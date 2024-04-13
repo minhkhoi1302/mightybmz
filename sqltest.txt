@@ -1,0 +1,81 @@
+CREATE TABLE teachers(
+	teacher_id int PRIMARY KEY IDENTITY(1,1),
+	first_name varchar(100),
+	last_name varchar(100),
+	subject varchar(50)
+);
+
+CREATE TABLE classes(
+	class_id int PRIMARY KEY IDENTITY(1,1),
+	class_name varchar(50),
+	teacher_id int FOREIGN KEY REFERENCES teachers(teacher_id)
+);
+
+CREATE TABLE students(
+	student_id int PRIMARY KEY IDENTITY(1,1),
+	first_name varchar(100),
+	last_name varchar(100),
+	class_id int FOREIGN KEY REFERENCES classes(class_id),
+	dob date
+);
+
+SET IDENTITY_INSERT teachers ON
+INSERT INTO teachers(teacher_id,first_name,last_name,subject)
+	VALUES(1,'nguyen van','an','math'),
+	(2,'le van','be','english'),
+	(3,'ngo van','xe','literature');
+
+SELECT * FROM teachers;
+SET IDENTITY_INSERT teachers OFF
+
+SET IDENTITY_INSERT classes ON
+INSERT INTO classes(class_id,class_name,teacher_id)
+	VALUES(1,'10A',1),
+	(2,'10B',2),
+	(3,'10C',3),
+	(4,'10D',1),
+	(5,'10E',2);
+
+SELECT * FROM classes;
+SET IDENTITY_INSERT classes OFF
+
+SET IDENTITY_INSERT students ON
+INSERT INTO students(student_id,first_name,last_name,class_id,dob)
+	VALUES (1,'nguyen le','A',1,'2000-01-01'),
+	(2,'nguyen le','B',1,'2005-01-02'),
+	(3,'nguyen le','C',2,'2001-01-03'),
+	(4,'nguyen le','D',2,'1998-01-04'),
+	(5,'nguyen le','E',3,'2004-01-05'),
+	(6,'nguyen le','F',3,'1994-01-06'),
+	(7,'nguyen le','G',4,'2009-01-07'),
+	(8,'nguyen le','H',4,'1996-01-08'),
+	(9,'nguyen le','I',5,'2007-01-09'),
+	(10,'nguyen le','J',5,'2006-01-10')
+
+SELECT * FROM students;
+SET IDENTITY_INSERT students OFF
+
+SELECT s.first_name AS studentfirstname,
+	   s.last_name AS studentlastname, 
+	   c.class_name, 
+	   t.first_name AS teacherfirstname, 
+	   t.last_name AS teacherlastname
+FROM students s
+	INNER JOIN classes c ON s.class_id = c.class_id
+	INNER JOIN teachers t ON c.teacher_id = t.teacher_id;
+
+SELECT * FROM students WHERE YEAR(dob) >= 2000;
+
+SELECT s.first_name AS studentfirstname, 
+	   s.last_name AS studentlastname, 
+	   c.class_name, 
+	   t.first_name AS teacherfirstname, 
+	   t.last_name AS teacherlastname
+FROM students s
+	INNER JOIN classes c ON s.class_id = c.class_id
+	INNER JOIN Teachers t ON c.teacher_id = t.teacher_id
+ORDER BY s.first_name, s.last_name;
+
+UPDATE students SET first_name = 'John', last_name = 'Doe' WHERE student_id = '3';
+
+DELETE FROM students WHERE student_id = '7';
