@@ -1,0 +1,19 @@
+CREATE TABLE book(
+	id int PRIMARY KEY IDENTITY (1,1),
+	name varchar(100),
+	author varchar(50),
+	content varchar(500),
+	nam_xb datetime,
+	lab_xb int
+);
+
+CREATE TABLE nhaxuatban(
+	name varchar(50),
+	dia_chi varchar(255),
+);
+
+CREATE TABLE ban(
+	gia varchar(10),
+	so_luong int,
+	loai varchar(50)
+);
