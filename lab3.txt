@@ -1,0 +1,22 @@
+CREATE TABLE classes( id varchar(20) PRIMARY KEY, name varchar(100) NOT NULL UNIQUE, room varchar(20) ); CREATE TABLE students( id varchar(20) PRIMARY KEY, name varchar(100) NOT NULL, dob DATE ); CREATE TABLE subjects( id varchar(20) PRIMARY KEY, name varchar(150) NOT NULL UNIQUE ); CREATE TABLE results( id int PRIMARY KEY IDENTITY(1,1), mark int NOT NULL CHECK(mark >= 0 AND mark <=10), result varchar(50) NOT NULL, student_id varchar(20) NOT NULL REFERENCES students(id), subject_id varchar(20) NOT NULL REFERENCES subjects(id) ); CREATE TABLE student_subjects( student_id varchar(20) NOT NULL REFERENCES students(id), subject_id varchar(20) NOT NULL REFERENCES subjects(id) );
+
+insert into classes(id,name,room)
+	values('KT1-K22','ke toan 1','201');
+
+insert into students(id,name,dob)
+	values('TH102291','nguyen van an','1995-03-28');
+
+insert into subjects(id,name)
+	values('THDC','tin hoc');
+
+insert into results(mark,result,student_id,subject_id)
+	values('8','kha','TH102291','THDC');
+
+insert into student_subjects(student_id,subject_id)
+	values('TH102291','THDC');
+
+SELECT * FROM classes;
+SELECT * FROM students;
+SELECT * FROM subjects;
+SELECT * FROM results;
+SELECT * FROM student_subjects;
