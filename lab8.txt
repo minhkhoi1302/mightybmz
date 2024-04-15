@@ -1,0 +1,11 @@
+CREATE TABLE danhba(
+	ho_va_ten varchar(100),
+	dia_chi varchar(100),
+	tel varchar(20) PRIMARY KEY,
+	dob varchar(20)
+);
+
+insert into danhba(ho_va_ten,dia_chi,tel,dob)
+	values('nguyen van an','111 nguyen trai, thanh xuan, hn','098765424','98-11-18');
+
+SELECT * FROM danhba;
