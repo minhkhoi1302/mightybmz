@@ -1,0 +1,29 @@
+CREATE TABLE sanpham(
+	ma_so_sp varchar(20) PRIMARY KEY,
+	ngaysanxuat datetime
+);
+
+CREATE TABLE nguoichiutrachnhiem(
+	id varchar(10) PRIMARY KEY,
+	ten varchar(50)
+);
+
+CREATE TABLE loaisanpham(
+	ma_so_sp varchar(20) FOREIGN KEY REFERENCES sanpham(ma_so_sp),
+	ma_nguoi varchar(10) FOREIGN KEY REFERENCES nguoichiutrachnhiem(id),
+	ten varchar(50),
+	ma_loai_sp varchar(10) PRIMARY KEY
+);
+
+insert into sanpham(ma_so_sp,ngaysanxuat)
+	values('Z37 111111','09-12-12');
+
+insert into nguoichiutrachnhiem(id,ten)
+	values('987668','nguyen van an');
+
+insert into loaisanpham(ma_so_sp,ma_nguoi,ten,ma_loai_sp)
+	values('Z37 111111','987668','may tinh xach tay z37','z37e');
+
+SELECT * FROM sanpham;
+SELECT * FROM nguoichiutrachnhiem;
+SELECT * FROM loaisanpham;
